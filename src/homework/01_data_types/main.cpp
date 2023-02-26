@@ -8,7 +8,6 @@
 int main()
 {
 	std::cout << "Hello, World!" <<
-	std::end;
 
 	return 0;
 }
@@ -29,6 +28,7 @@ int main()
 
 	int result = multiply_numbers(num);
 	std::cout << "Result:" << result <<
+std::end;
 
 	int num1 = 4;
 	result = multiply_numbers(num1);
