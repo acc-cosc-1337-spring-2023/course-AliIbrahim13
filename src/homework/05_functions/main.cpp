@@ -7,8 +7,38 @@ and display them to screen.
 Program continues until user decides to exit.
 
 */
-int main() 
-{
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include "func.h"
 
-	return 0;
+int main() {
+    int choice;
+    std::string dna;
+
+    while(true) {
+        std::cout << "Menu\n";
+        std::cout << "1- Get GC Content\n";
+        std::cout << "2- Get DNA Complement\n";
+        std::cout << "3- Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
+
+        switch(choice) {
+            case 1:
+                std::cout << "Enter DNA string: ";
+                std::cin >> dna;
+                std::cout << "GC content is: " << get_gc_content(dna) << std::endl;
+                break;
+            case 2:
+                std::cout << "Enter DNA string: ";
+                std::cin >> dna;
+                std::cout << "DNA complement is: " << get_dna_complement(get_reverse_string(dna)) << std::endl;
+                break;
+            case 3:
+                return 0;
+            default:
+                std::cout << "Invalid choice. Please enter a number between 1 and 3." << std::endl;
+        }
+    }
 }
