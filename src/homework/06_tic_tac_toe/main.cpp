@@ -1,31 +1,43 @@
 #include <iostream>
-#include <string>
-#include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
+
 
 int main() {
-    std::string player;
-    char choice;
+    std::cout << "Welcome to Tic-Tac-Toe!" << std::endl;
 
-    do {
-        TicTacToe game;
-        std::cout << "Enter X or O to start the game: ";
-        std::cin >> player;
-        game.start_game(player);
+    char playAgain = 'y';
+    while (playAgain == 'y') {
+        TicTacToeManager manager;
 
-        int position;
-        do {
-            std::cout << "Player " << game.get_player() << " enter position between 1 and 9: ";
-            std::cin >> position;
-            game.mark_board(position);
-            game.display_board();
-        } while (!game.game_over());
+        // Play the game
+        std::unique_ptr<TicTacToe> game = std::make_unique<TicTacToe>();
+        manager.start_game(game);
 
-        std::cout << "The winner is " << game.get_winner() << std::endl;
+        // Print the game board
+        std::cout << game << '\n';
 
-        std::cout << "Do you want to play again? (y/n): ";
-        std::cin >> choice;
-    } while (choice == 'y' || choice == 'Y');
 
-    std::cout << "Thanks for playing!" << std::endl;
+        // Get the game statistics
+        int x, o, t;
+        manager.get_winner_totals(x, o, t);
+
+        // Print the winner or tie message
+        if (x > o) {
+            std::cout << "Congratulations, X has won!" << std::endl;
+        } else if (o > x) {
+            std::cout << "Congratulations, O has won!" << std::endl;
+        } else {
+            std::cout << "The game ended in a tie." << std::endl;
+        }
+
+        // Print the game history
+        std::cout << "\nGame history:\n";
+        std::cout << manager << std::endl;
+
+        // Ask if the user wants to play again
+        std::cout << "Do you want to play again? (y/n) ";
+        std::cin >> playAgain;
+    }
+
     return 0;
 }
