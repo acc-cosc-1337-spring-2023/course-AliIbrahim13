@@ -14,7 +14,7 @@ int main() {
         manager.start_game(game);
 
         // Print the game board
-        std::cout << game << '\n';
+        std::cout << *game << '\n';
 
 
         // Get the game statistics

@@ -1,30 +1,34 @@
-#include <string>
+#ifndef TICTACTOE_H
+#define TICTACTOE_H
+
 #include <vector>
+#include <string>
+#include <iostream>
 
 class TicTacToe
 {
 public:
-    TicTacToe() = default;
-    TicTacToe(std::vector<std::string> p, std::string win) : pegs{ p }, winner{ win } {};
-
+    TicTacToe(int size);
+    bool game_over();
     void start_game(std::string first_player);
     void mark_board(int position);
     std::string get_player() const;
-    void display_board() const;
     std::string get_winner() const;
-    bool game_over();
-    friend std::ostream& operator<<(std::ostream& out, const TicTacToe& game);
-    friend std::istream& operator>>(std::istream& in, TicTacToe& game);
+    std::vector<std::string> get_pegs() const;
+
+protected:
+    virtual bool check_column_win();
+    virtual bool check_row_win();
+    virtual bool check_diagonal_win();
+    void set_winner();
+    void set_next_player();
+    void clear_board();
+    std::vector<std::string> pegs; // Declare the pegs variable here
 
 private:
-    void set_next_player();
-    bool check_board_full() const;
-    bool check_column_win() const;
-    bool check_row_win() const;
-    bool check_diagonal_win() const;
-    std::vector<std::string> pegs{ 9, " " };
-    std::string winner{ "" };
-    std::string player{ "" };
-    void clear_board();
-    void set_winner();
+    std::string player;
+    std::string winner;
 };
+
+
+#endif // TICTACTOE_H
