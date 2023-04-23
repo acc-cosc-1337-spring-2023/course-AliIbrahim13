@@ -1,10 +1,12 @@
 #include "tic_tac_toe.h"
+#include "math.h"
 
 using namespace std;
 
 // TicTacToe class
 
 TicTacToe::TicTacToe(int size) : pegs(size*size, " ") {}
+TicTacToe::TicTacToe(vector<string> p, string win) : pegs(p), winner(win) {}
 
 void TicTacToe::start_game(string first_player)
 {
@@ -53,7 +55,7 @@ void TicTacToe::clear_board()
     }
 }
 
-bool TicTacToe::check_board_full() const
+bool TicTacToe::check_board_full()
 {
     for (auto peg : pegs)
     {
@@ -108,7 +110,7 @@ void TicTacToe::set_winner()
 
 // Overloaded stream operators
 
-ostream& operator<<(ostream& out, const TicTacToe& game)
+std::ostream &operator<<(std::ostream &out, const TicTacToe &game)
 {
     int size = sqrt(game.pegs.size());
 
@@ -124,7 +126,7 @@ ostream& operator<<(ostream& out, const TicTacToe& game)
     return out;
 }
 
-istream& operator>>(istream& in, TicTacToe& game)
+std::istream& operator>>(std::istream& in, TicTacToe& game)
 {
     int position;
     cout << "Enter position from 1 to " << game.pegs.size() << ": ";
@@ -132,94 +134,4 @@ istream& operator>>(istream& in, TicTacToe& game)
     game.mark_board(position);
 
     return in;
-}
-
-// TicTacToe3 class
-
-TicTacToe3::TicTacToe3() : TicTacToe(3) {}
-
-bool TicTacToe3::check_column_win()
-{
-    for (int i = 0; i < 3; i++)
-    {
-        if (pegs[i] != " " && pegs[i] == pegs[i + 3] && pegs[i] == pegs[i + 6])
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool TicTacToe3::check_row_win()
-{
-    for (int i = 0; i < 9; i += 3)
-    {
-        if (pegs[i] != " " && pegs[i] == pegs[i + 1] && pegs[i] == pegs[i + 2])
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool TicTacToe3::check_diagonal_win()
-{
-        if (pegs[0] !=" " && pegs[0] == pegs[4] && pegs[0] == pegs[8])
-        {
-            return true;
-        }
-
-        if (pegs[2] != " " && pegs[2] == pegs[4] && pegs[2] == pegs[6])
-        {
-            return true;
-        }
-
-    return false;
-}
-
-// TicTacToe4 class
-
-TicTacToe4::TicTacTooe4():TicTacToe(4) {}
-
-bool TicTacToe4::check_column_win()
-{
-    for(int i = O; i < 4; i++)
-    {
-        if (pegs[i] !+ " " && pegs[i] ==pegs[i + 4] && pegs[i] == pegs[i + 8] && pegs[i] == pegs[i + 12])
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool TicTacToe4::check_row_win()
-{
-    for (int i = 0; i < 16; i += 4)
-    {
-        if (pegs[i] != " " && pegs[i] == pegs[i + 1] && pegs[i] == pegs[i + 2] && pegs[i] == pegs[i + 3])
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool TicTacToe3::check_diagonal_win()
-{
-        if (pegs[0] !=" " && pegs[0] == pegs[5] && pegs[0] == pegs[10] && pegs[0] == pegs[15])
-        {
-            return true;
-        }
-
-        if (pegs[3] != " " && pegs[3] == pegs[6] && pegs[3] == pegs[9] && pegs[3] == pegs[12])
-        {
-            return true;
-        }
-
-    return false;
 }

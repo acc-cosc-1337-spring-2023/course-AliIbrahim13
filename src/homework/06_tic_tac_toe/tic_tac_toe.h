@@ -15,11 +15,16 @@ public:
     std::string get_player() const;
     std::string get_winner() const;
     std::vector<std::string> get_pegs() const;
+    TicTacToe(std::vector<std::string> p, std::string win);
+
+    friend std::istream& operator>>(std::istream& in,  TicTacToe& game);
+    friend std::ostream& operator<<(std::ostream& out, const TicTacToe& game);
 
 protected:
     virtual bool check_column_win();
     virtual bool check_row_win();
     virtual bool check_diagonal_win();
+    bool check_board_full();
     void set_winner();
     void set_next_player();
     void clear_board();
