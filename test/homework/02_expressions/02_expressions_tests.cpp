@@ -2,13 +2,15 @@
 #include "catch.hpp"
 #include "hwexpressions.h"
 
-TEST_CASE("Verify Test Configuration", "verification") {
-	REQUIRE(true == true);
+
+// Test Case 1: get_sales_tax_amount function
+TEST_CASE("get_sales_tax_amount", "[get_sales_tax_amount]") {
+    REQUIRE(get_sales_tax_amount(10) == 0.675);
+    REQUIRE(get_sales_tax_amount(20) == 1.35);
 }
 
-TEST_CASE("Verify sum_numbers function") 
-{
-	REQUIRE(add_numbers(5, 5) == 10);
-	REQUIRE(add_numbers(10, 10) == 20);
+// Test Case 2: get_tip_amount function
+TEST_CASE("get_tip_amount", "[get_tip_amount]") {
+    REQUIRE(get_tip_amount(20, 0.15) == 3);
+    REQUIRE(get_tip_amount(20, 0.2) == 4);
 }
-
